@@ -3,6 +3,15 @@
 @section('content')
 <h1>User Information</h1>
 <div class="card-body border w-50 my-3 m-auto">
+	@if ($errors->any())
+		<div class="alert alert-danger">
+			<ul>
+				@foreach ($errors->all() as $error)
+					<li>{{ $error }}</li>
+				@endforeach
+			</ul>
+		</div>
+	@endif
 	<form action="/admins/{{($userEdit)? 'update/'.$userEdit->id:'register'}}" method='post' enctype="multipart/form-data">
 		 @csrf
 		<div class="form-group">

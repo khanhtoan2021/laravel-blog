@@ -1,3 +1,1 @@
-<footer>
-<h1>Đây là nội dung footer</h1>
-</footer>
+<footer class="container"><div class="row my-5 border-top"><p class="float-end"><a href="#">Back to top</a></p><p>© 2017–2021 Company, Inc. ·<a href="#">Privacy ·</a><a href="#">Terms</a></p></div></footer>

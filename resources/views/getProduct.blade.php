@@ -3,6 +3,6 @@
 @section('content')
 <div class="news">
     <h3>Tin trong ngày</h3>
-    <p>thanh vien xem tin tuc</p>
+    <p>get noi dung product</p>
 </div>
 @endsection

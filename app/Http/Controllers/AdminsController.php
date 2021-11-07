@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\AdminRequest;
+use App\Http\Requests\RegisterRequest;
 class AdminsController extends Controller
 {
 	public function listAll(){
@@ -18,7 +21,7 @@ class AdminsController extends Controller
 	public function addForm(){
 		return view('admins.addForm',["userEdit"=>""]); //addForm the same editForm
 	}
-	public function add(Request $request) {
+	public function add(RegisterRequest $request) {
 		if($request->hasFile('avatar')) {
 		//$image = $request->file('avatar');
 			$image = $request->avatar;
@@ -27,15 +30,15 @@ class AdminsController extends Controller
 		}else{
 			$fileName='';
 		}
-
-		$users = new User;
-		$users->fullName = $request->fullName; 
-		$users->email = $request->email;
-		$users->password = bcrypt($request->password);
-		$users->age = $request->age; 
-		$users->gender = $request->gender; 
-		$users->avatar = $fileName;
-		$users->save();
+		$data=[
+			'fullName'=>$request->fullName,
+			'email'=>$request->email,
+			'password'=>bcrypt($request->password),
+			'age'=>$request->age,
+			'gender'=>$request->gender,
+			'avatar'=>$fileName
+		];
+		DB::table('users')->insert($data);
 		return redirect('/admins');
 	}
 	public function delete($id) {
@@ -61,23 +64,59 @@ class AdminsController extends Controller
 	public function loginForm(){
 		return view('admins.loginForm');
 	}
-	public function login(Request $request){
-		//printf($request->email);
-		//printf($request->password);
-		//$users = new User;
-		$email =$request->input('email');
-    $pass = User::where('email',$email)->first();
+	public function login(AdminRequest $request){
+		//$request->validate();
+		$arr=[
+			'email'=>$request->email,
+			'password'=>$request->password
+		];
+		if (Auth::attempt($arr)) {
 
-		//$pass = User::where('email', $request->email);
-		//$post = Post::where('id', $id);
-		printf($pass);
-
-		exit("vao login");
+			//$ss=$request->session()->regenerate();
+			$user = Auth::user();
+			echo "<pre>";
+			var_dump($user->fullName);
+			//printf($user);
+			exit("uuuu");
+			return redirect('/admins/home');
+		}else{
+			return back()->withErrors([
+         'password' => 'The provided credentials do not match our records.',
+     	]);
+		}
+	}
+	public function logout(){
+		Auth::logout();
+  return redirect('/admins/login');
+	}
+	public function home(){
+		return view('admins.home');
+	}
+	public function member(){
+		return view('roles.member');
+	}
+	public function adminPage(){
+		return view('roles.admin');
 	}
 	public function test(){
-		$password = bcrypt('my-secret-password');
-		$str='$2y$10$/0Jm8APPA3.bodn3/sxdIebFE1ZXiZxl0tlSGTyqv/vdJhpm8q4zq';
-		exit($password);
+		// get all user ok
+		// $users = DB::table('users')->get();
+		// foreach ($users as $user) {
+  //   	echo $user->fullName;
+  //   	echo "<br>";
+		// }
+		$user = DB::table('users')->where('email', 'ktoan86@yahoo.com')->first();
+		//var_dump($user->password);
+		$password = bcrypt('123456');
+		echo $password;
+		$str='$2y$10$HqC3i3A1GtT1OqeIHw6OPOvK6SSmExOeGpq5i0UFvfE/UpuTXVLOS';
+		if ($password===$str) {
+			// code...echo
+			echo "password da dung";
+		}else{
+			echo "password da sai";
+		}
+		exit();
 	}
 
 }

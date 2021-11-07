@@ -5,9 +5,15 @@
 <div class="card-body border w-50 my-3 m-auto">
 	<div class="d-flex flex-column">
 		<img class="m-auto" src="/storage/avatars/myAvatar.png" alt="my avatar" style="width: 150px;">
-		<div class="alert alert-danger my-3" role="alert">
-			<p></p>
-		</div>
+		@if ($errors->any())
+			<div class="alert alert-danger">
+				<ul>
+					@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			</div>
+		@endif
 	</div>
 	<form action="/admins/login" method='post' enctype="multipart/form-data">
 		 @csrf
@@ -17,7 +23,7 @@
 		</div>
 		<div class="form-group">
 			<label for="">Password</label>	
-			<input class="form-control my-1" type="text" name="password" required="required">
+			<input class="form-control my-1" type="password" name="password" required="required">
 		</div>
 		<div class="card-footer d-flex flex-row-reverse bg-light">
 			<button class="btn btn-block btn-success" type="submit">Login</button>

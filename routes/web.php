@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\Authenticate;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,8 @@ Route::get('/about', function () {
     return view('about',['name'=>'xin chao ban Khanh Toan']);
 });
 Route::get('/news', 'NewsController@index');
-Route::get('/admins', 'AdminsController@listAll');
+Route::get('/admins/home', 'AdminsController@home');
+Route::get('/admins', 'AdminsController@listAll')->middleware('AdminRole');
 Route::get('/admins/register', 'AdminsController@addForm');
 Route::post('/admins/register', 'AdminsController@add');
 Route::get('/admins/delete/{id}', 'AdminsController@delete');
@@ -28,7 +30,16 @@ Route::get('/admins/editForm/{id}', 'AdminsController@editForm');
 Route::post('/admins/update/{id}', 'AdminsController@update');
 Route::get('/admins/login', 'AdminsController@loginForm');
 Route::post('/admins/login', 'AdminsController@login');
+Route::get('/admins/logout', 'AdminsController@logout');
 
+Route::get('/news/index', 'NewsController@index')->middleware('MemberRole');
+Route::get('/news/getproduct', 'NewsController@getproduct')->middleware('MemberRole');
+
+
+Route::get('/admins/admin', 'AdminsController@adminPage')->middleware('AdminRole');
+Route::get('/admins/member', 'AdminsController@member')->middleware('MemberRole');
+
+Route::get('/blogs/listAll', 'BlogsController@listAll');
 
 
 

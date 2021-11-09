@@ -39,7 +39,11 @@ Route::get('/news/getproduct', 'NewsController@getproduct')->middleware('MemberR
 Route::get('/admins/admin', 'AdminsController@adminPage')->middleware('AdminRole');
 Route::get('/admins/member', 'AdminsController@member')->middleware('MemberRole');
 
-Route::get('/blogs/listAll', 'BlogsController@listAll');
+Route::get('/posts/home', 'PostsController@index')->name('homePage');
+Route::get('/posts/listAll', 'PostsController@listAll')->name('posts.listAll');
+Route::get('/posts/getPost', 'PostsController@getPost');
+Route::get('/posts/queryPost', 'PostsController@queryPost');
+Route::get('/posts/getHelper', 'PostsController@getHelper');
 
 
 

@@ -6,7 +6,10 @@
 	<input class="form-control form-control-dark w-50" type="text" placeholder="Search" aria-label="Search">
 	<div class="d-flex">
 		<a class="btn btn-primary px-3 me-3" href="/admins/register">Sign up</a>
-		<a class="btn btn-secondary px-3 me-3" href="/admins/login">Sign in</a>
-		<a class="btn btn-secondary px-3 me-3" href="/admins/logout">Logout</a>
+		@if ($sessionUser)
+			<a class="btn btn-secondary px-3 me-3" href="/admins/logout">Logout</a>
+		@else
+			<a class="btn btn-secondary px-3 me-3" href="/admins/login">Sign in</a>
+		@endif
 	</div>
 </header>

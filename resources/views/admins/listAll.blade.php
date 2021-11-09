@@ -1,7 +1,7 @@
 @extends('admins.main')
 
 @section('content')
-<h1>{{ $pageName }}</h1>
+<h1>Tên Trang - Users</h1>
 <!-- <img src="storage/avatars/1636008679.674122900.thien nhien 2.jpeg" alt="anh"> -->
 <div class="table-responsive">
   <table class="table table-striped table-sm">

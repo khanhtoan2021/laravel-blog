@@ -21,6 +21,7 @@
         "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
+        "files":{"app/Helpers/math.php"},
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",

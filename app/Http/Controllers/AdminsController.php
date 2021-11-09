@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
-use Illuminate\Support\Facades\Auth;
+use Auth;
+//use Illuminate\Support\Facades\Auth;
+use Session;
 use App\Http\Requests\AdminRequest;
 use App\Http\Requests\RegisterRequest;
 class AdminsController extends Controller
@@ -15,13 +17,13 @@ class AdminsController extends Controller
 		$news = DB::table('users')->select('*')->get();
 				//$news = $news->get();
 				//printf($news);
-		$pageName = 'Tên Trang - Users';
-		return view('admins.listAll', compact('news', 'pageName'));
+		return view('admins.listAll', ['news'=>$news,'sessionUser'=>Session::get('user')]);
 	}
 	public function addForm(){
-		return view('admins.addForm',["userEdit"=>""]); //addForm the same editForm
+		return view('admins.addForm',["userEdit"=>"",'sessionUser'=>Session::get('user')]); //addForm the same editForm
 	}
 	public function add(RegisterRequest $request) {
+		$user=Session::get('user');
 		if($request->hasFile('avatar')) {
 		//$image = $request->file('avatar');
 			$image = $request->avatar;
@@ -62,7 +64,7 @@ class AdminsController extends Controller
 		return redirect('/admins');
 	}
 	public function loginForm(){
-		return view('admins.loginForm');
+		return view('admins.loginForm',['sessionUser'=>Session::get('user')]);
 	}
 	public function login(AdminRequest $request){
 		//$request->validate();
@@ -71,13 +73,9 @@ class AdminsController extends Controller
 			'password'=>$request->password
 		];
 		if (Auth::attempt($arr)) {
-
 			//$ss=$request->session()->regenerate();
 			$user = Auth::user();
-			echo "<pre>";
-			var_dump($user->fullName);
-			//printf($user);
-			exit("uuuu");
+			Session::put('user', $user);
 			return redirect('/admins/home');
 		}else{
 			return back()->withErrors([
@@ -87,10 +85,11 @@ class AdminsController extends Controller
 	}
 	public function logout(){
 		Auth::logout();
+		Session::flush();// delete all session
   return redirect('/admins/login');
 	}
 	public function home(){
-		return view('admins.home');
+		return view('admins.home',['sessionUser'=>Session::get('user')]);
 	}
 	public function member(){
 		return view('roles.member');
@@ -99,6 +98,7 @@ class AdminsController extends Controller
 		return view('roles.admin');
 	}
 	public function test(){
+		exit($sess);
 		// get all user ok
 		// $users = DB::table('users')->get();
 		// foreach ($users as $user) {

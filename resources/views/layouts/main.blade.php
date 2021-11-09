@@ -63,9 +63,47 @@
 				<span class="visually-hidden">Next</span>
 			</button>
 		</div>
-		<div class="leftContent">
-			@yield('content')
+		<div class="container">
+			<div class="row">
+				<div class="col-9">
+					<div class="leftContent">
+						@yield('content')
+					</div>
+				</div>
+				<div class="col-3 bg-success">
+					<div class="rightContent">
+						<div class="userProfile my-3">
+							<div class="card" style="width: 100%;">
+								<div class="card-body">
+									<h5 class="card-title">User Profile</h5>
+									<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+									<a class="btn btn-primary" href="#">Go somewhere</a>
+								</div>
+							</div>
+						</div>
+						<div class="userProfile my-3">
+							<div class="card" style="width: 100%;">
+								<div class="card-body">
+									<h5 class="card-title">User Profile</h5>
+									<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+									<a class="btn btn-primary" href="#">Go somewhere</a>
+								</div>
+							</div>
+						</div>
+						<div class="userProfile my-3">
+							<div class="card" style="width: 100%;">
+								<div class="card-body">
+									<h5 class="card-title">User Profile</h5>
+									<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+									<a class="btn btn-primary" href="#">Go somewhere</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+			
 	</main>
 	
 	@include('layouts.footer')

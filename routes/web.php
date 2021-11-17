@@ -39,9 +39,20 @@ Route::get('/news/getproduct', 'NewsController@getproduct')->middleware('MemberR
 Route::get('/admins/admin', 'AdminsController@adminPage')->middleware('AdminRole');
 Route::get('/admins/member', 'AdminsController@member')->middleware('MemberRole');
 
+Route::get('/users/register', 'UsersController@getRegister');
+Route::post('/users/register', 'UsersController@register');
+
+
 Route::get('/posts/home', 'PostsController@index')->name('homePage');
 Route::get('/posts/listAll', 'PostsController@listAll')->name('posts.listAll');
-Route::get('/posts/getPost', 'PostsController@getPost');
+Route::get('/posts/addPost', 'PostsController@getPostForm');
+Route::post('/posts/addPost', 'PostsController@addPost');
+Route::post('/posts/uploadImages', 'PostsController@uploadImages');
+
+Route::post('/posts/myAjax', 'PostsController@myAjax');
+Route::get('/posts/getproduct', 'PostsController@getproduct');
+
+
 Route::get('/posts/queryPost', 'PostsController@queryPost');
 Route::get('/posts/getHelper', 'PostsController@getHelper');
 

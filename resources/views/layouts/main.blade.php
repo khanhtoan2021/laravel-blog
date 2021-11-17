@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="stylesheet" href="{{ URL::asset('/css/bootstrap.min.css') }}" />
 	<link rel="stylesheet" href="{{ URL::asset('/css/all.css') }}" />
 	<link rel="stylesheet" href="{{ URL::asset('/css/dashboard.css') }}" />
@@ -109,6 +110,9 @@
 	@include('layouts.footer')
 	<script src="{{ URL::asset('/js/bootstrap.min.js') }}"></script>
 	<script src="{{ URL::asset('/js/jquery-3.6.0.min.js') }}"></script>
+	<script src="{{ URL::asset('/ckeditorv5/ckeditor.js') }}"></script>
+  <script src="{{ URL::asset('/ckfinder/ckfinder.js') }}"></script>
 	<script src="{{ URL::asset('/js/blog-style.js') }}"></script>
+  @yield ('footer_scripts')
 </body>
 </html>

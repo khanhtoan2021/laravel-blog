@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="{{ URL::asset('/css/bootstrap.min.css') }}" />
 	<link rel="stylesheet" href="{{ URL::asset('/css/all.css') }}" />
 	<link rel="stylesheet" href="{{ URL::asset('/css/dashboard.css') }}" />
-	<link rel="stylesheet" href="{{ URL::asset('/css/style.css') }}" />
+	<link rel="stylesheet" href="{{ URL::asset('/css/blog-style.css') }}" />
 	<title>Laravel Hello</title>
 </head>
 <body>
@@ -114,6 +114,6 @@
 	@include('admins.footer')
 	<script src="{{ URL::asset('/js/bootstrap.min.js') }}"></script>
 	<script src="{{ URL::asset('/js/jquery-3.6.0.min.js') }}"></script>
-	<script src="{{ URL::asset('/js/style.js') }}"></script>
+	<script src="{{ URL::asset('/js/blog-style.js') }}"></script>
 </body>
 </html>

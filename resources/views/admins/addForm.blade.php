@@ -13,7 +13,7 @@
 		</div>
 	@endif
 	<form action="/admins/{{($userEdit)? 'update/'.$userEdit->id:'register'}}" method='post' enctype="multipart/form-data">
-		 @csrf
+		 <!-- @csrf -->
 		<div class="form-group">
 			<label for="">Full Name</label>	
 			<input class="form-control my-1" type="text" name="fullName" value="{{($userEdit)? $userEdit->fullName:''}}" required="required">

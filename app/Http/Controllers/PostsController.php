@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
+use Session;
+use Auth;
 class PostsController extends Controller
 {
     /**
@@ -18,7 +20,7 @@ class PostsController extends Controller
     }
     public function listAll()
     {
-        return view('posts.listAll');
+        return view('posts.listAll',['sessionUser'=>Session::get('user')]);
     }
 
     /**
@@ -28,7 +30,8 @@ class PostsController extends Controller
      */
     public function getHelper()
     {
-        $kq=tong(2,3);
+        $kq=tong(2,3)*123;
+        printf($kq);
         exit($kq);
     }
     public function getPost()
@@ -39,7 +42,7 @@ class PostsController extends Controller
         $user = $post->user;
 
         $category = $post->postcategory;
-        exit($comments);
+        exit($category);
         //exit($users);
         //exit($comments);
         //return view('getPost');
@@ -60,9 +63,12 @@ class PostsController extends Controller
                     ->get();
         exit($comments);
     }
-    public function create()
+    public function getPostForm()
     {
-        //
+        $categories = DB::table('post_categories')
+                    ->select('id', 'article')
+                    ->get();
+        return view('posts.getPostForm',['categories'=>$categories,'postEdit'=>'','sessionUser'=>Session::get('user')]);
     }
 
     /**
@@ -71,11 +77,46 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function addPost(Request $request)
     {
-        //
+        if($request->hasFile('thumbnail')) {
+            $thumbnail = $request->thumbnail;
+            $fileName=time().'.'.rand().'.'.$thumbnail->getClientOriginalName();
+            $thumbnail->storeAs('public/thumbnails',$fileName,'local'); //public inside of storage folder
+        }else{
+            $fileName='';
+        }
+        return $request;
     }
-
+    public function uploadImages(Request $request)
+    {
+        if($request->hasFile('upload')) {
+            $upload = $request->upload;
+            $fileName=time().'.'.rand().'.'.$upload->getClientOriginalName();
+            $upload->storeAs('public/contents',$fileName,'local'); //public inside of storage folder
+        }
+        //$fileName="hinh1.png";
+        return response()->json([
+            'fileName' => $fileName,
+            'uploaded' => 1,
+            'url' => '/storage/contents/'.$fileName
+        ]);
+    }
+    public function myAjax(Request $request)
+    {
+        return response()->json($request->a);
+        // $fileName="xin chao ban";
+        // return response()->json([
+        //     'fileName' => $fileName,
+        //     'uploaded' => 1,
+        //     'url' => 'public/contents/'+$fileName
+        // ]);
+    }
+    public function getproduct(Request $request)
+    {
+        echo "chao ban";
+        exit('here');
+    }
     /**
      * Display the specified resource.
      *

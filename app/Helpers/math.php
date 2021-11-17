@@ -1,6 +1,9 @@
 <?php
-function tong($a,$b){
-	return $a+$b;
+function tong(int $a,int $b){
+	$add=$a*$b;
+	$str="xin chao cac ban";
+	return $add;
+	//return $str;
 }
 
 ?>

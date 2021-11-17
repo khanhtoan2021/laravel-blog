@@ -26,8 +26,12 @@
 					<button class="btn btn-outline-success" type="submit">Search</button>
 				</form>
 				<div class="d-flex flex-row-reverse mx-2">
-					<a class="btn btn-light" id="logout" href="/users/logout"><i class="fas fa-sign-out-alt me-2"></i><span>logout</span></a>
-					<a class="btn btn-success me-3" id="sigin" href="/users/register"><i class="fas fa-plus-circle me-2"></i><span>Sigin</span></a>
+					@if ($sessionUser)
+					<a class="btn btn-light" id="logout" href="/users/logout"><i class="fas fa-sign-out-alt me-2"></i><span>Logout</span></a>
+					@else
+					<a class="btn btn-light" id="login" href="/users/login"><i class="fas fa-sign-out-alt me-2"></i><span>Login</span></a>
+					@endif
+					<a class="btn btn-success me-3" id="signup" href="/users/register"><i class="fas fa-plus-circle me-2"></i><span>Sign Up</span></a>
 				</div>
 			</div>
 		</div>

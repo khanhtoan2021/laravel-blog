@@ -39,13 +39,16 @@ Route::get('/news/getproduct', 'NewsController@getproduct')->middleware('MemberR
 Route::get('/admins/admin', 'AdminsController@adminPage')->middleware('AdminRole');
 Route::get('/admins/member', 'AdminsController@member')->middleware('MemberRole');
 
-Route::get('/users/register', 'UsersController@getRegister');
+Route::get('/users/login', 'UsersController@getLogin');
+Route::post('/users/login', 'UsersController@postLogin');
+Route::get('/users/logout', 'UsersController@logout');
 Route::post('/users/register', 'UsersController@register');
 
 
 Route::get('/posts/home', 'PostsController@index')->name('homePage');
 Route::get('/posts/listAll', 'PostsController@listAll')->name('posts.listAll');
 Route::get('/posts/addPost', 'PostsController@getPostForm');
+Route::get('/posts/detail/{id}', 'PostsController@detail');
 Route::post('/posts/addPost', 'PostsController@addPost');
 Route::post('/posts/uploadImages', 'PostsController@uploadImages');
 

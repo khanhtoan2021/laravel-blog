@@ -7,7 +7,7 @@
     <legend class="col-form-label col-sm-2 pt-0">Article</legend>
     <div class="col-sm-10">
       <div class="form-check ms-3">
-        <select class="form-select form-select-sm" name="postCategory_id" aria-label=".form-select-sm example">
+        <select class="form-select form-select-sm" name="postCategory_id" required="required" aria-label=".form-select-sm example">
           <option selected>Choose a Article</option>
           @foreach($categories as $category)
             <option value="{{$category->id}}">{{$category->article}}</option>
@@ -24,13 +24,18 @@
     </div>
   </div> 
   <div class="row mb-3">
+    <label for="title" class="col-sm-2 col-form-label">Title</label>
+    <div class="col-sm-10">
+        <input type="text" name="title" class="form-control" required="required">
+    </div>
+  </div> 
+  <div class="row mb-3">
     <label for="Contents" class="col-sm-2 col-form-label">Contents</label>
     <div class="col-sm-10">
-        <textarea name="editor1" class="form-control" id="editor2"></textarea>
+        <textarea name="content" class="form-control" id="editor2"></textarea>
         <button type="submit" class="btn btn-primary my-3">Create a Post</button>
     </div>
   </div> 
-  
 
 </form>
 <div class="row">
